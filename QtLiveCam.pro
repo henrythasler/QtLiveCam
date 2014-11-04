@@ -15,5 +15,5 @@ include(deployment.pri)
 HEADERS += \
     settings.h
 
-VERSION = $$system(head -1 $${PWD}/.git/ORIG_HEAD | awk \'{print $1}\')
+VERSION = $$system(head -1 $${PWD}/.git/refs/heads/master | awk \'{print $1}\')
 DEFINES += GIT_ID_LONG=\\\"\"$${VERSION}\"\\\"
