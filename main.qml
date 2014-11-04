@@ -9,29 +9,44 @@ ApplicationWindow {
     height: 480
     title: qsTr("QtLiveCam - " + GitID)
 
-    Component.onCompleted: {
-        mainwindow.x = settings.value("WindowPos/x", 100)
-        mainwindow.y = settings.value("WindowPos/y",100)
-        mainwindow.width = settings.value("WindowPos/width", 640)
-        mainwindow.height = settings.value("WindowPos/height", 480)
-    }
-    Component.onDestruction: {
-        settings.beginGroup("WindowPos");
-            settings.setValue("x", mainwindow.x);
-            settings.setValue("y", mainwindow.y);
-            settings.setValue("width", mainwindow.width);
-            settings.setValue("height", mainwindow.height);
-        settings.endGroup();
-    }
-
-    VideoOutput {
-        source: camera
+    Item {
+        focus: true
         anchors.fill: parent
-        id: video
-        fillMode: VideoOutput.PreserveAspectCrop
-        Camera {
-            id: camera
+        Keys.onEscapePressed: {
+            camera.stop();
+            Qt.quit();
+        }
+        Component.onCompleted: {
+            mainwindow.x = settings.value("WindowPos/x", 100);
+            mainwindow.y = settings.value("WindowPos/y", 100);
+            mainwindow.width = Math.min(Math.max(settings.value("WindowPos/width", 640), 320), 10000);
+            mainwindow.height = Math.min(Math.max(settings.value("WindowPos/height", 480), 200), 10000);
+            mainwindow.visibility = (settings.value("WindowPos/visibility", 1) == 4) ? 4 : 1;
+        }
+        Component.onDestruction: {
+            settings.beginGroup("WindowPos");
+                settings.setValue("visibility", mainwindow.visibility);
+                if(mainwindow.visibility != 4) {
+                    settings.setValue("x", mainwindow.x);
+                    settings.setValue("y", mainwindow.y);
+                    settings.setValue("width", mainwindow.width);
+                    settings.setValue("height", mainwindow.height);
+                }
+            settings.endGroup();
+        }
+        VideoOutput {
+            source: camera
+            anchors.fill: parent
+            id: video
+            fillMode: VideoOutput.PreserveAspectCrop
+            Camera {
+                id: camera
+                imageCapture {
+                    onImageCaptured: {
+                        console.log("snap");
+                    }
+                }
+            }
         }
     }
-
 }
