@@ -37,7 +37,6 @@ Item {
         settings.endGroup();
     }
 
-
     RowLayout {
         spacing: 2
         anchors.fill: parent
@@ -62,7 +61,7 @@ Item {
                 id: camera
                 imageCapture {
                     onImageCaptured: {
-                        list.model.insert(0, {"url": preview});
+                        list.model.append({"url": database.storeImage(preview)});
                         previews.visible = true;
                     }
                 }

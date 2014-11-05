@@ -5,6 +5,7 @@
 #include <QtMultimedia/QCameraInfo>
 
 #include "settings.h"
+#include "databasehandler.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,11 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("settings", &settings);
+
+    DatabaseHandler *database = new DatabaseHandler();
+    engine.addImageProvider(QLatin1String("database"), database);
+    engine.rootContext()->setContextProperty("database", database);
+
     engine.rootContext()->setContextProperty("GitID", QStringLiteral(GIT_ID_LONG).left(7));
     qDebug() << engine.importPathList();
 

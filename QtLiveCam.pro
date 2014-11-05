@@ -2,7 +2,8 @@ TEMPLATE = app
 
 QT += qml quick widgets multimedia
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    databasehandler.cpp
 
 RESOURCES += qml.qrc
 
@@ -13,7 +14,8 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    settings.h
+    settings.h \
+    databasehandler.h
 
 VERSION = $$system(head -1 $${PWD}/.git/refs/heads/master | awk \'{print $1}\')
 DEFINES += GIT_ID_LONG=\\\"\"$${VERSION}\"\\\"
