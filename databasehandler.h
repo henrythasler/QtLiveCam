@@ -1,19 +1,29 @@
 #ifndef DATABASEHANDLER_H
 #define DATABASEHANDLER_H
 
-//#include <QtQuick>
 #include <QObject>
 #include <QQuickImageProvider>
 #include <QtDebug>
 #include <QUuid>
+#include <QMessageBox>
+#include <QtSql>
+
+#include <QQmlEngine>
+#include <QQmlContext>
 
 class DatabaseHandler : public QObject, public QQuickImageProvider
 {
     Q_OBJECT
 public:
     DatabaseHandler();
-    QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize);
-    Q_INVOKABLE QString storeImage(const QString &id);
+    QImage requestImage(const QString &uuid, QSize *size, const QSize &requestedSize);
+    Q_INVOKABLE QString storeImage(const QUrl &path);
+
+private:
+    void showError(QSqlError error);
+
+    QSqlDatabase db;
+    bool init;
 
 };
 

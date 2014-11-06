@@ -13,7 +13,6 @@ Item {
     focus: true
     anchors.fill: parent
     Keys.onEscapePressed: {
-        camera.stop();
         Qt.quit();
     }
 
@@ -38,39 +37,50 @@ Item {
     }
 
     RowLayout {
-        spacing: 2
+        spacing: 5
         anchors.fill: parent
         VideoOutput {
             id: video
             Layout.fillWidth: true
             Layout.fillHeight: true
-            source: camera
+            source: cam
             fillMode: VideoOutput.PreserveAspectCrop
 
             MouseArea {
                 anchors.fill: parent;
                 onClicked: {
+/*
                     if(camera.imageCapture.ready) {
+                        console.log(video.sourceRect.width+"x"+video.sourceRect.height)
                         root.aspect = video.sourceRect.width/video.sourceRect.height;
                         camera.imageCapture.capture();
                     }
+*/
                 }
             }
-
+/*
             Camera {
                 id: camera
+//                videoRecorder.resolution: "864x480"
                 imageCapture {
                     onImageCaptured: {
                         list.model.append({"url": database.storeImage(preview)});
                         previews.visible = true;
                     }
                 }
+
+
+                onError: {
+                    console.log(errorString);
+                }
             }
+*/
         }
         ColumnLayout {
             id: previews
             visible: false
-            spacing: 2
+            spacing: parent.spacing
+
             Rectangle {
                 color: "pink"
                 Layout.alignment: Qt.AlignTop
@@ -82,8 +92,9 @@ Item {
                 Layout.minimumWidth: root.sidebarWidth
                 Layout.fillHeight: true
                 clip: true
-                spacing: 2
+                spacing: parent.spacing
                 boundsBehavior: Flickable.StopAtBounds
+//                Behavior on Layout.minimumWidth { PropertyAnimation {} }
 
                 model: ListModel{}
                 delegate: Image {
@@ -94,6 +105,7 @@ Item {
                     MouseArea{
                         anchors.fill: parent;
                         onClicked: {
+                            list.Layout.minimumWidth = 400
                         }
                     }
                 }

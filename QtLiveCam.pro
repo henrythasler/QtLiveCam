@@ -1,9 +1,10 @@
 TEMPLATE = app
 
-QT += qml quick widgets multimedia
+QT += qml quick widgets multimedia sql
 
 SOURCES += main.cpp \
-    databasehandler.cpp
+    databasehandler.cpp \
+    livecam.cpp
 
 RESOURCES += qml.qrc
 
@@ -15,7 +16,8 @@ include(deployment.pri)
 
 HEADERS += \
     settings.h \
-    databasehandler.h
+    databasehandler.h \
+    livecam.h
 
 VERSION = $$system(head -1 $${PWD}/.git/refs/heads/master | awk \'{print $1}\')
 DEFINES += GIT_ID_LONG=\\\"\"$${VERSION}\"\\\"
