@@ -49,6 +49,8 @@ Item {
             MouseArea {
                 anchors.fill: parent;
                 onClicked: {
+                    console.log("clicked");
+                    cam.snap();
 /*
                     if(camera.imageCapture.ready) {
                         console.log(video.sourceRect.width+"x"+video.sourceRect.height)
@@ -61,7 +63,7 @@ Item {
 /*
             Camera {
                 id: camera
-//                videoRecorder.resolution: "864x480"
+                videoRecorder.resolution: "864x480"
                 imageCapture {
                     onImageCaptured: {
                         list.model.append({"url": database.storeImage(preview)});
