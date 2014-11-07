@@ -8,14 +8,19 @@
 #include "settings.h"
 #include "databasehandler.h"
 #include "livecam.h"
+#include "webcam.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    appSettings settings;
+
     QQmlApplicationEngine engine;
 
-    appSettings settings;
+    qmlRegisterType<Webcam>("webcam", 1, 0, "Webcam");
+
+
     engine.rootContext()->setContextProperty("settings", &settings);
 
     LiveCam cam;

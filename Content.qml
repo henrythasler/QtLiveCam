@@ -4,6 +4,8 @@ import QtQuick.Controls 1.2
 import QtQuick.Window 2.2
 import QtQuick.Layouts 1.1
 
+import webcam 1.0
+
 Item {
     id: root
     property var mainwindow: NULL
@@ -39,6 +41,21 @@ Item {
     RowLayout {
         spacing: 5
         anchors.fill: parent
+        Webcam {
+            id: webcam
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+//            width: 1280
+//            height: 720
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    webcam.frameSize = Qt.size(160,120);
+                }
+            }
+        }
+
+/*
         VideoOutput {
             id: video
             Layout.fillWidth: true
@@ -51,16 +68,13 @@ Item {
                 onClicked: {
                     console.log("clicked");
                     cam.snap();
-/*
-                    if(camera.imageCapture.ready) {
-                        console.log(video.sourceRect.width+"x"+video.sourceRect.height)
-                        root.aspect = video.sourceRect.width/video.sourceRect.height;
-                        camera.imageCapture.capture();
-                    }
-*/
+//                    if(camera.imageCapture.ready) {
+//                        console.log(video.sourceRect.width+"x"+video.sourceRect.height)
+//                        root.aspect = video.sourceRect.width/video.sourceRect.height;
+//                        camera.imageCapture.capture();
+//                    }
                 }
             }
-/*
             Camera {
                 id: camera
                 videoRecorder.resolution: "864x480"
@@ -76,8 +90,8 @@ Item {
                     console.log(errorString);
                 }
             }
-*/
         }
+*/
         ColumnLayout {
             id: previews
             visible: false

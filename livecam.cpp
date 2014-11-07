@@ -9,14 +9,11 @@ void LiveCam::setVideoSurface(QAbstractVideoSurface* surface)
 {
   qDebug() << "Changing surface: " << surface->supportedPixelFormats();
   m_surface = surface;
-
-//  QVideoEncoderSettingsControl *enc = service()->requestControl<QVideoEncoderSettingsControl*>();
-//  QVideoEncoderSettings sets = enc->videoSettings();
-//  sets.setResolution(100, 100);
-//  enc->setVideoSettings(sets);
   setViewfinder(m_surface);
+  load();
+  start();
 
-
+  /*
   QCameraCaptureBufferFormatControl *cap = qobject_cast<QCameraCaptureBufferFormatControl *>(service()->requestControl("org.qt-project.qt.cameracapturebufferformatcontrol/5.0"));
   qDebug() << cap->bufferFormat();
   cap->setBufferFormat(QVideoFrame::Format_YUYV);
@@ -47,9 +44,8 @@ void LiveCam::setVideoSurface(QAbstractVideoSurface* surface)
 
   QVideoEncoderSettings sets = vctrl->videoSettings();
   sets.setResolution(160, 120);
+*/
 
-  load();
-  start();
 
 
 //  setVideoOutput(m_surface);

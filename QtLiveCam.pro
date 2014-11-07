@@ -4,7 +4,9 @@ QT += qml quick widgets multimedia sql
 
 SOURCES += main.cpp \
     databasehandler.cpp \
-    livecam.cpp
+    livecam.cpp \
+    videosurface.cpp \
+    webcam.cpp
 
 RESOURCES += qml.qrc
 
@@ -17,7 +19,9 @@ include(deployment.pri)
 HEADERS += \
     settings.h \
     databasehandler.h \
-    livecam.h
+    livecam.h \
+    videosurface.h \
+    webcam.h
 
 VERSION = $$system(head -1 $${PWD}/.git/refs/heads/master | awk \'{print $1}\')
 DEFINES += GIT_ID_LONG=\\\"\"$${VERSION}\"\\\"
