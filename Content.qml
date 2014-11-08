@@ -15,6 +15,8 @@ Item {
     focus: true
     anchors.fill: parent
     Keys.onEscapePressed: {
+        webcam.stop();
+
         Qt.quit();
     }
 
@@ -45,8 +47,6 @@ Item {
             id: webcam
             Layout.fillWidth: true
             Layout.fillHeight: true
-//            width: 1280
-//            height: 720
             MouseArea {
                 anchors.fill: parent
                 onClicked: {

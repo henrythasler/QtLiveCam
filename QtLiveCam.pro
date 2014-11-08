@@ -23,5 +23,4 @@ HEADERS += \
     videosurface.h \
     webcam.h
 
-VERSION = $$system(head -1 $${PWD}/.git/refs/heads/master | awk \'{print $1}\')
-DEFINES += GIT_ID_LONG=\\\"\"$${VERSION}\"\\\"
+DEFINES += GIT_ID_LONG=\\\"$$system(git log -1 --format='%H')\\\"

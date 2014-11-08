@@ -14,12 +14,16 @@ class Webcam : public QQuickPaintedItem
 public:
     explicit Webcam(QQuickItem *parent = 0);
 
+    Q_INVOKABLE void start(QSize res = QSize());
+    Q_INVOKABLE void stop();
+
     QSize frameSize(){return m_frameSize;};
     void setframeSize(QSize val);
 
 private:
     virtual void paint(QPainter *painter);
     QPixmap m_currentFrame;
+    QImage m_currentImage;
     VideoSurface m_surface;
     QCamera* m_camera;
     QSize m_frameSize;

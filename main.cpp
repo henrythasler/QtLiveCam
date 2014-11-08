@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
+#include <QDebug>
 
 #include <QtMultimedia/QCameraInfo>
 #include <QtMultimedia/QCameraCaptureDestinationControl>
