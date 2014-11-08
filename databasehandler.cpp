@@ -33,10 +33,36 @@ QImage DatabaseHandler::requestImage(const QString &uuid, QSize *size, const QSi
 {
 //    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 //    db.
-
     QImage img(2,2, QImage::Format_RGB32);
     qDebug() << uuid;
     img.fill(QColor("#" + uuid.left(6)).rgb());
+
+
+    if(init)
+    {
+        QSqlQuery query("SELECT image FROM Images WHERE uuid=\""+uuid+"\"");
+        while (query.next()) {
+//            qDebug() << "DB: " << query.value(0).toString();
+            QByteArray ba(query.value(0).toByteArray());
+            QBuffer buffer(&ba);
+            buffer.open(QIODevice::ReadOnly);
+            img.load(&buffer, "JPEG");
+        }
+/*
+        q.prepare(QLatin1String("SELECT FROM Images(image) WHERE uuid=") + uuid +
+                  QLatin1String("VALUES (:image)"));
+        QByteArray ba;
+        q.bindValue(":image", ba);
+
+        if(!q.exec()) showError(db.lastError());
+        else
+        {
+            QBuffer buffer(&ba);
+            buffer.open(QIODevice::ReadOnly);
+            img.load(&buffer, "JPEG");
+        }
+*/
+    }
     return img;
 }
 
@@ -44,7 +70,6 @@ QImage DatabaseHandler::requestImage(const QString &uuid, QSize *size, const QSi
 QString DatabaseHandler::storeImage(const QUrl &path)
 {
     QString uuid = QUuid::createUuid().toString().mid(1,36);
-
     if(init) {
         QSqlQuery q;
         q.prepare(QLatin1String("INSERT INTO Images(uuid, image)"
@@ -71,6 +96,28 @@ QString DatabaseHandler::storeImage(const QUrl &path)
     }
 
     return("image://database/"+uuid);
+}
+
+
+QString DatabaseHandler::storePixmap(const QPixmap &pixmap)
+{
+    QString uuid = QUuid::createUuid().toString().mid(1,36);
+    if(init) {
+        QSqlQuery q;
+        q.prepare(QLatin1String("INSERT INTO Images(uuid, image)"
+                                "VALUES (:uuid, :image)"));
+        q.bindValue(":uuid", uuid);
+
+        QByteArray ba;
+        QBuffer buffer(&ba);
+        buffer.open(QIODevice::WriteOnly);
+        pixmap.save(&buffer, "JPEG");
+        q.bindValue(":image", ba);
+
+        if(!q.exec()) showError(db.lastError());
+    }
+
+    return(uuid);
 }
 
 void DatabaseHandler::showError(QSqlError error)

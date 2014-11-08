@@ -11,6 +11,7 @@ Item {
     property var mainwindow: NULL
     property var sidebarWidth: 200
     property var aspect: 1
+    property var webcam: webcam
 
     focus: true
     anchors.fill: parent
@@ -45,13 +46,20 @@ Item {
         anchors.fill: parent
         Webcam {
             id: webcam
+            database: ImageDB
             Layout.fillWidth: true
             Layout.fillHeight: true
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    webcam.frameSize = Qt.size(160,120);
+                    webcam.snap();
+//                    webcam.frameSize = Qt.size(160,120);
                 }
+            }
+            onSnapshotAvailable: {
+                console.log(uuid);
+                list.model.append({"url": "image://database/"+uuid});
+                if(!previews.visible) previews.visible = true;
             }
         }
 
