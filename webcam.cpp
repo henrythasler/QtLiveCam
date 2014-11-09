@@ -16,7 +16,7 @@ Webcam::Webcam(QQuickItem *parent) :
     m_camera->setViewfinder( static_cast<QAbstractVideoSurface*>( &m_surface ) );
     m_currentFrame.fill();
 
-//    start();
+    start();
 }
 
 void Webcam::start(QSize res)

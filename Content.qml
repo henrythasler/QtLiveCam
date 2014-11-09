@@ -8,25 +8,25 @@ import webcam 1.0
 
 Item {
     id: root
-    property var mainwindow: NULL
+    property var mainwindow: 0
     property var sidebarWidth: 200
     property var aspect: 1
     property var webcam: webcam
+    property var groupid: 0
 
     focus: true
     anchors.fill: parent
     Keys.onEscapePressed: {
         webcam.stop();
-
         Qt.quit();
     }
 
     Component.onCompleted: {
-        mainwindow.x = settings.value("WindowPos/x", 100);
-        mainwindow.y = settings.value("WindowPos/y", 100);
-        mainwindow.width = Math.min(Math.max(settings.value("WindowPos/width", 640), 320), 10000);
-        mainwindow.height = Math.min(Math.max(settings.value("WindowPos/height", 480), 200), 10000);
-        mainwindow.visibility = (settings.value("WindowPos/visibility", 1) == 4) ? 4 : 1;
+//        mainwindow.x = settings.value("WindowPos/x", 100);
+//        mainwindow.y = settings.value("WindowPos/y", 100);
+//        mainwindow.width = Math.min(Math.max(settings.value("WindowPos/width", 640), 320), 10000);
+//        mainwindow.height = Math.min(Math.max(settings.value("WindowPos/height", 480), 200), 10000);
+//        mainwindow.visibility = (settings.value("WindowPos/visibility", 1) == 4) ? 4 : 1;
     }
 
     Component.onDestruction: {

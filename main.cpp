@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include <QDebug>
+#include <QWindow>
 
 #include <QtMultimedia/QCameraInfo>
 #include <QtMultimedia/QCameraCaptureDestinationControl>
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     appSettings settings;
+//    DatabaseHandler database;
     DatabaseHandler *database = new DatabaseHandler();
 
     QQmlApplicationEngine engine;
@@ -41,6 +43,8 @@ int main(int argc, char *argv[])
     }
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
+    app.topLevelWindows().first()->showFullScreen();
 
     return app.exec();
 }
