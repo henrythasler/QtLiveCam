@@ -27,3 +27,5 @@ DEFINES += GIT_ID_LONG=\\\"$$system(git log -1 --format='%H')\\\"
 #DEFINES += GIT_ID_LONG=\\\"$system(git log -1 --format='%H')\\\"
 
 #'"\\\"$(shell date)\\\""'
+
+OTHER_FILES +=

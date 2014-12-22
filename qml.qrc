@@ -2,5 +2,13 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Content.qml</file>
+        <file>sv_home.qml</file>
+        <file>artwork/qrc-back-btn-90.png</file>
+        <file>artwork/qrc-back-btn-135.png</file>
+        <file>artwork/qrc-back-btn-180.png</file>
+        <file>artwork/qrc-round-glow-90.png</file>
+        <file>artwork/qrc-round-glow-135.png</file>
+        <file>artwork/qrc-round-glow-180.png</file>
+        <file>artwork/qrc-grey-line.png</file>
     </qresource>
 </RCC>

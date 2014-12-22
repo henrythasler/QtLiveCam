@@ -42,9 +42,10 @@ int main(int argc, char *argv[])
         qDebug() << item.deviceName() << item.description() << item.position() << "Orientation:" << item.orientation();
     }
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+//    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/sv_home.qml")));
 
-    app.topLevelWindows().first()->showFullScreen();
+//    app.topLevelWindows().first()->showFullScreen();
 
     return app.exec();
 }
